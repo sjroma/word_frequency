@@ -5,30 +5,31 @@ class Wordfreq
 
   def initialize(filename)
 		@filename = filename
-		
 		@words = File.read(@filename).strip.downcase.gsub(/\W+/, ' ').split.delete_if{|x| STOP_WORDS.include?(x)}
 #		p @words
-		
+#		@top_words = top_words(10)
 		@frequencies = frequencies
-		puts @frequencies
+		#puts @frequencies
   end
 
   def frequency(word)
-		@frequencies
+		@frequencies[word]
   end
 
   def frequencies
 		frequencies = Hash.new(0)
-		@words.each do |word|
-		frequencies[word] += 1
-    end
+		  @words.each do |word|
+		    frequencies[word] += 1
+      end
 		frequencies
   end
 
   def top_words(number)
+		results = @frequencies.sort_by{ |key, value| val}.reverse.take(number).to_h
   end
 
   def print_report
+		p frequency("power")
   end
 end
 
